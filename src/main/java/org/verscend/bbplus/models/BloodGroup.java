@@ -40,7 +40,7 @@ public class BloodGroup {
 
 	@Override
 	public String toString() {
-		return "BloodGroup [bloodGroupId=" + bloodGroupId + ", bloodType=" + bloodType + "]";
+		return "BloodGroupRepository [bloodGroupId=" + bloodGroupId + ", bloodType=" + bloodType + "]";
 	}
 
 }

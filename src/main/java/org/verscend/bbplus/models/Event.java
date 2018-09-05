@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Event {
@@ -16,6 +18,8 @@ public class Event {
 	private int eventId;
 	private String eventTitle;
 	private String eventAddress;
+
+	@Temporal(TemporalType.DATE)
 	private Date eventDate;
 	private String eventTime;
 	@Lob
@@ -23,7 +27,7 @@ public class Event {
 
 	public Event() {
 	}
-	
+
 	public Event(int eventId, String eventTitle, String eventAddress, Date eventDate, String eventTime,
 			String eventDescription) {
 		super();
@@ -83,5 +87,4 @@ public class Event {
 		this.eventDescription = eventDescription;
 	}
 
-	
 }

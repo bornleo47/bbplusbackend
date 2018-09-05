@@ -2,22 +2,15 @@ package org.verscend.bbplus.models;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.verscend.bbplus.privilege.UserRole;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.verscend.bbplus.privilege.Role;
 
 @Entity
 public class User implements Serializable {
@@ -31,6 +24,7 @@ public class User implements Serializable {
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
 	private String address;
 	private String gender;
@@ -45,13 +39,33 @@ public class User implements Serializable {
 	@JoinColumn(name = "districtId")
 	private District district;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
-	private Set<UserRole> userRoles = new HashSet<>();
+	@OneToOne
+	private Role role;
 
 	private boolean eanbled = true;
 
 	public User() {
+	}
+
+	public User(long userId, String username, String password, String firstName, String middleName, String lastName,
+			Date dateOfBirth, String address, String gender, String email, String phoneNo, BloodGroup bloodGroup,
+			District district, Role role, boolean eanbled) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.gender = gender;
+		this.email = email;
+		this.phoneNo = phoneNo;
+		this.bloodGroup = bloodGroup;
+		this.district = district;
+		this.role = role;
+		this.eanbled = eanbled;
 	}
 
 	public long getUserId() {
@@ -86,7 +100,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getMiddlName() {
+	public String getMiddleName() {
 		return middleName;
 	}
 
@@ -158,12 +172,12 @@ public class User implements Serializable {
 		this.district = district;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public boolean isEanbled() {

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import org.verscend.bbplus.models.User;
 import org.verscend.bbplus.repository.UserRepository;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders="*")
 public class UserResource {
 
 	@Autowired
@@ -32,12 +35,12 @@ public class UserResource {
 	}
 
 	@DeleteMapping("users/{id}")
-	public void deleteUser(int id) {
+	public void deleteUser(@PathVariable int id) {
 		userRepository.deleteById((long) id);
 	}
 
 	@PutMapping("updateUser")
-	public void updateUser(User user) {
+	public void updateUser(@RequestBody User user) {
 		userRepository.save(user);
 	}
 

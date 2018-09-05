@@ -7,40 +7,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class BloodRecord {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int bloodRecordId;
+	private Integer bloodRecordId;
 
 	@OneToOne
 	private BloodGroup bloodGroup;
 	private long pint;
 	private String donorName;
+	private long donorPhone;
+	@Temporal(TemporalType.DATE)
 	private Date entryDate = new Date();
-	private long phone;
 
 	public BloodRecord() {
 	}
 
-	public BloodRecord(int bloodRecordId, BloodGroup bloodGroup, long pint, String donorName, Date entryDate,
-			long phone) {
+	public BloodRecord(BloodGroup bloodGroup, long pint, String donorName, long donorPhone) {
 		super();
-		this.bloodRecordId = bloodRecordId;
 		this.bloodGroup = bloodGroup;
 		this.pint = pint;
 		this.donorName = donorName;
-		this.entryDate = entryDate;
-		this.phone = phone;
+		this.donorPhone = donorPhone;
 	}
 
 	public int getBloodRecordId() {
 		return bloodRecordId;
 	}
 
-	public void setBloodRecordId(int bloodRecordId) {
+	public void setBloodRecordId(Integer bloodRecordId) {
 		this.bloodRecordId = bloodRecordId;
 	}
 
@@ -72,16 +72,16 @@ public class BloodRecord {
 		return entryDate;
 	}
 
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = entryDate;
+//	public void setEntryDate(Date entryDate) {
+//		this.entryDate = entryDate;
+//	}
+
+	public long getDonorPhone() {
+		return donorPhone;
 	}
 
-	public long getPhone() {
-		return phone;
-	}
-
-	public void setPhone(long phone) {
-		this.phone = phone;
+	public void setDonorPhone(long donorPhone) {
+		this.donorPhone = donorPhone;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,12 +36,12 @@ public class EventResource {
 	}
 
 	@DeleteMapping("events/{eventId}")
-	public void deleteEvent(int eventId) {
+	public void deleteEvent(@PathVariable int eventId) {
 		eventRepository.deleteById(eventId);
 	}
 
 	@PutMapping("updateEvent")
-	public void updateEvent(Event event) {
+	public void updateEvent(@RequestBody Event event) {
 		eventRepository.save(event);
 	}
 
